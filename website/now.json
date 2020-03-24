@@ -1,0 +1,7 @@
+{
+  "build": {
+    "env": {
+      "AIRTABLE_TOKEN": "@helpsf-airtable-token"
+    }
+  }
+}

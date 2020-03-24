@@ -1,0 +1,6 @@
+{
+  "editor.formatOnSave": true,
+  "javascript.format.semicolons": "remove",
+  "prettier.semi": false,
+  "prettier.singleQuote": true
+}
