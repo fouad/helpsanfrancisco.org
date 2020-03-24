@@ -26,9 +26,16 @@ export const SelectInput = ({ value, onChange, children }) => (
   </div>
 )
 
-export const SearchTextInput = ({ placeholder, value, onChange, onSortByLocation, confirmedLocationPermission }) => (
+export const SearchTextInput = ({
+  value,
+  onChange,
+  placeholder,
+  onSortByLocation,
+  requestingLocation,
+  confirmedLocationPermission
+}) => (
   <div className="mt-1 flex">
-    <div className="relative rounded-md shadow-sm flex-1 mr-3">
+    <div className="relative rounded-l-md shadow-sm flex-1">
       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
         <svg
           viewBox="0 0 20 20"
@@ -48,25 +55,32 @@ export const SearchTextInput = ({ placeholder, value, onChange, onSortByLocation
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className="form-input block pl-10 sm:text-md sm:leading-5 w-full"
+        className="form-input block pl-10 sm:text-md sm:leading-5 w-full rounded-r-none"
       />
     </div>
-
-    <button
-      onClick={onSortByLocation}
-      className="outline-none focus:shadow-outline bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-2 border border-gray-300 rounded-md shadow focus:shadow-outline"
-      style={{ outline: 'none'}}
-    >
-      <svg
-        height="24px"
-        width="24px"
-        viewBox="0 0 24 24"
-        x="0px"
-        y="0px"
-        className={`fill-current ${confirmedLocationPermission ? 'text-blue-500' : 'text-gray-400'}`}
+    {onSortByLocation && (
+      <button
+        onClick={onSortByLocation}
+        className={`flex outline-none focus:shadow-outline bg-white hover:bg-gray-100 font-semibold py-1 px-2 border border-gray-300 border-l-0 rounded-r-md shadow-sm focus:shadow-outline ${
+          confirmedLocationPermission ? 'text-blue-500' : 'text-gray-600'
+        }`}
+        style={{ outline: 'none' }}
       >
-        <path fillRule="evenodd" d="M11 18L13 13 18 11 6 6z" />
-      </svg>
-    </button>
+        <svg
+          x="0px"
+          y="0px"
+          width="24px"
+          height="24px"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          className="fill-current mr-1"
+        >
+          <path fillRule="evenodd" d="M11 18L13 13 18 11 6 6z" />
+        </svg>
+        <span style={{ width: 61 }}>
+          {requestingLocation ? 'Loading' : 'Near me'}
+        </span>
+      </button>
+    )}
   </div>
 )
