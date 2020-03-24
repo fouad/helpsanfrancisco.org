@@ -123,16 +123,18 @@ export const Page = ({ url, title, ogImage, description, children }) => (
 )
 
 export const CardList = ({ options, filter }) => {
-  let optionFilter = o =>
-    !filter ||
-    new RegExp(filter, 'i').test([o.name, ...(o.tags || [])].join(''))
+  let filteredOptions = options.filter(
+    o =>
+      !filter ||
+      new RegExp(filter, 'i').test([o.name, ...(o.tags || [])].join(''))
+  )
 
   return (
     <div className="mt-4 border-t border-gray-300">
-      {options.filter(optionFilter).length === 0 && (
+      {filteredOptions.length === 0 && (
         <div className="text-gray-400 py-8 px-10">No Results</div>
       )}
-      {options.filter(optionFilter).map((option, cardKey) => (
+      {filteredOptions.map((option, cardKey) => (
         <a
           key={cardKey}
           href={option.href}

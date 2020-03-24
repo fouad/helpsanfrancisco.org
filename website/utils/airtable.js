@@ -21,9 +21,16 @@ export async function getRecords({
 
     let { records } = result
 
-    return records.map(r => r.fields)
+    return shuffle(records.map(r => r.fields))
   } catch (err) {
     console.error(err)
     throw new Error('airtable: failed: ' + err.message)
   }
+}
+
+function shuffle(array) {
+  return array
+    .map(a => ({ sort: Math.random(), value: a }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(a => a.value)
 }
