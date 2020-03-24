@@ -26,9 +26,16 @@ export const SelectInput = ({ value, onChange, children }) => (
   </div>
 )
 
-export const SearchTextInput = ({ placeholder, value, onChange }) => (
-  <div>
-    <div className="mt-1 relative rounded-md shadow-sm">
+export const SearchTextInput = ({
+  value,
+  onChange,
+  placeholder,
+  onSortByLocation,
+  requestingLocation,
+  confirmedLocationPermission
+}) => (
+  <div className="mt-1 flex">
+    <div className="relative rounded-l-md shadow-sm flex-1">
       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
         <svg
           viewBox="0 0 20 20"
@@ -48,8 +55,32 @@ export const SearchTextInput = ({ placeholder, value, onChange }) => (
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className="form-input block w-full pl-10 sm:text-md sm:leading-5"
+        className="form-input block pl-10 sm:text-md sm:leading-5 w-full rounded-r-none"
       />
     </div>
+    {onSortByLocation && (
+      <button
+        onClick={onSortByLocation}
+        className={`flex outline-none focus:shadow-outline bg-white hover:bg-gray-100 font-semibold py-1 px-2 border border-gray-300 border-l-0 rounded-r-md shadow-sm focus:shadow-outline ${
+          confirmedLocationPermission ? 'text-blue-500' : 'text-gray-600'
+        }`}
+        style={{ outline: 'none' }}
+      >
+        <svg
+          x="0px"
+          y="0px"
+          width="24px"
+          height="24px"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          className="fill-current mr-1"
+        >
+          <path fillRule="evenodd" d="M11 18L13 13 18 11 6 6z" />
+        </svg>
+        <span style={{ width: 61 }}>
+          {requestingLocation ? 'Loading' : 'Near me'}
+        </span>
+      </button>
+    )}
   </div>
 )

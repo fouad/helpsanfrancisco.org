@@ -142,6 +142,9 @@ export const CardList = ({ options, filter }) => {
         >
           <Card className="mt-4">
             <h5 className="font-semibold">{option.name}</h5>
+            {option.address && (
+              <span className="text-gray-500 text-sm">{option.address}</span>
+            )}
             {option.tags && (
               <div className="mt-2">
                 {option.tags.map((tag, key) => (
@@ -196,11 +199,21 @@ export const CTAHeader = ({ activeTab = 'need' }) => (
         </Link>
       </ButtonGroup>
     </ButtonRow>
-    <AnchorButton
-      className="text-lg mt-6 border"
-      href="https://twitter.com/HelpSForg"
-    >
-      @HelpSForg
-    </AnchorButton>
+    <ButtonRow>
+      <AnchorButton
+        className="text-lg mt-6 border mr-3"
+        href="https://twitter.com/HelpSForg"
+      >
+        @HelpSForg
+      </AnchorButton>
+      <AnchorButton
+        className="text-lg mt-6 border"
+        href={`https://twitter.com/intent/tweet?url=https://helpsanfrancisco.org&text=${encodeURIComponent(
+          'Help San Francisco businesses and people by making a donation or volunteering at'
+        )}`}
+      >
+        Tweet this page
+      </AnchorButton>
+    </ButtonRow>
   </InfoHeader>
 )

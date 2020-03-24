@@ -21,7 +21,20 @@ export async function getRecords({
 
     let { records } = result
 
-    return shuffle(records.map(r => r.fields))
+    const recordsWithLocation = records.map(({ fields }) => {
+      let location = {}
+
+      try {
+        location = JSON.parse(fields.location)
+      } catch (_e) {}
+
+      return {
+        ...fields,
+        location
+      }
+    })
+
+    return shuffle(recordsWithLocation)
   } catch (err) {
     console.error(err)
     throw new Error('airtable: failed: ' + err.message)
