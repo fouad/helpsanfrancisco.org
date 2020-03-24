@@ -4,16 +4,30 @@ import tw from 'tailwind.macro'
 import Link from 'next/link'
 import Head from 'next/head'
 
-export const AnchorButton = styled.a`
-  ${tw`inline-block bg-white border-2 border-gray-500 text-black cursor-pointer font-bold py-2 px-4 rounded`}
-    :hover {
-    ${tw`bg-gray-200`}
-  }
-  :focus {
+export const SegmentedButton = styled.a`
+  ${tw`relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700`}
+    :focus {
     ${tw`shadow-outline outline-none`}
   }
 
-  ${props => props.active && tw`text-orange-500 border-orange-500`}
+  ${props => (props.active ? tw`bg-gray-200` : tw`hover:bg-gray-100`)}
+`
+
+export const ButtonGroup = styled.span`
+  ${tw`relative z-0 inline-flex shadow-sm`}
+`
+
+export const AnchorButton = styled.a`
+  ${tw`inline-block rounded-full text-sm font-medium leading-none py-2 px-3 bg-blue-100 text-blue-700 border shadow-sm`}
+    :focus {
+    ${tw`shadow-outline outline-none`}
+  }
+  :hover {
+    ${tw`bg-blue-200`}
+  }
+  :active {
+    ${tw`bg-blue-300`}
+  }
 `
 
 const CardStyle = css`
@@ -23,6 +37,56 @@ const CardStyle = css`
 export const Card = styled.div`
   ${CardStyle}
   ${tw`hover:shadow-md active:shadow-sm`}
+`
+
+export const PageContent = styled.div`
+  ${tw`px-8 max-w-2xl mx-auto py-12`}
+`
+
+export const Logo = styled.h1`
+  ${tw`inline-block leading-none text-base text-left text-3s text-5xl font-black uppercase`}
+`
+
+const InfoHeader = styled.div`
+  ${tw`bg-gray-100 pt-10 pb-16 text-center`}
+
+  border-bottom: 2px solid #cbd5e0;
+`
+
+const InfoTitle = styled.h2`
+  ${tw`mx-auto px-8 max-w-2xl text-2xl-lg text-xl font-normal`}
+`
+
+const ButtonRow = styled.div`
+  ${tw`mx-auto px-8`}
+`
+
+const Tag = styled.span`
+  ${tw`inline-block rounded-md font-medium leading-none py-1 text-xs px-2 mr-2`}
+  ${props => {
+    switch (props.children) {
+      case 'Restaurant':
+        return tw`bg-indigo-100 text-indigo-700`
+      case 'Venue':
+        return tw`bg-orange-100 text-orange-700`
+      case 'Retail':
+        return tw`bg-teal-100 text-teal-700`
+      case 'Government':
+        return tw`bg-purple-100 text-purple-700`
+      case 'Non-profit':
+        return tw`bg-green-100 text-green-700`
+      case 'Tech Workers':
+        return tw`bg-yellow-100 text-yellow-700`
+      case 'Healthcare':
+        return tw`bg-blue-100 text-blue-700`
+      case 'Subscription':
+        return tw`bg-green-100 text-green-700`
+      case 'Donation':
+        return tw`bg-red-100 text-red-700`
+    }
+
+    return tw`bg-gray-100 text-gray-700`
+  }}
 `
 
 export const GlobalStyles = styled.div`
@@ -58,63 +122,21 @@ export const Page = ({ url, title, ogImage, description, children }) => (
   </GlobalStyles>
 )
 
-export const PageContent = styled.div`
-  ${tw`px-8 max-w-2xl mx-auto py-12`}
-`
+export const CardList = ({ options, filter }) => {
+  let optionFilter = o =>
+    !filter ||
+    new RegExp(filter, 'i').test([o.name, ...(o.tags || [])].join(''))
 
-export const Logo = styled.h1`
-  ${tw`inline-block leading-none text-base text-left text-3s text-5xl font-black uppercase`}
-`
-
-const InfoHeader = styled.div`
-  ${tw`bg-gray-100 pt-10 pb-16 text-center`}
-
-  border-bottom: 2px solid #cbd5e0;
-`
-
-const InfoTitle = styled.h2`
-  ${tw`mx-auto px-8 max-w-2xl text-2xl-lg text-xl font-normal`}
-`
-
-const ButtonRow = styled.div`
-  ${tw`mx-auto px-8`}
-`
-
-const Tag = styled.span`
-  ${tw`inline-block rounded-md font-medium leading-none py-1 text-xs px-2 mr-2`}
-  ${props => {
-    switch (props.children) {
-      case 'Restaurant':
-        return tw`bg-indigo-100 text-indigo-700`
-      case 'Coffee':
-        return tw`bg-brown-100 text-brown-700`
-      case 'GoFundMe':
-        return tw`bg-green-100 text-green-700`
-      case 'Healthcare':
-        return tw`bg-blue-100 text-blue-700`
-      case 'Subscription':
-        return tw`bg-green-100 text-green-700`
-      case 'Donation':
-        return tw`bg-red-100 text-red-700`
-    }
-
-    return tw`bg-gray-100 text-gray-700`
-  }}
-`
-
-export const CardList = ({ options, filter }) => (
-  <div className="mt-4 border-t border-gray-300">
-    {options.filter(o => !filter || new RegExp(filter, 'i').test(o.name))
-      .length === 0 && (
-      <div className="text-gray-400 py-8 px-10">No Results</div>
-    )}
-    {options
-      .filter(o => !filter || new RegExp(filter, 'i').test(o.name))
-      .map((option, cardKey) => (
+  return (
+    <div className="mt-4 border-t border-gray-300">
+      {options.filter(optionFilter).length === 0 && (
+        <div className="text-gray-400 py-8 px-10">No Results</div>
+      )}
+      {options.filter(optionFilter).map((option, cardKey) => (
         <a
           key={cardKey}
           href={option.href}
-          className="block no-underline focus:outline-none focus:shadow-outline"
+          className="block no-underline focus:outline-none focus:shadow-outline rounded-md"
         >
           <Card className="mt-4">
             <h5 className="font-semibold">{option.name}</h5>
@@ -128,8 +150,9 @@ export const CardList = ({ options, filter }) => (
           </Card>
         </a>
       ))}
-  </div>
-)
+    </div>
+  )
+}
 
 export const CTAHeader = ({ activeTab = 'need' }) => (
   <InfoHeader>
@@ -152,29 +175,30 @@ export const CTAHeader = ({ activeTab = 'need' }) => (
       some options:
     </InfoTitle>
     <ButtonRow>
-      <Link passHref href="/">
-        <AnchorButton active={activeTab === 'have'} className="mb-2 mr-2">
-          💰 I have money
-        </AnchorButton>
-      </Link>
-      <Link passHref href="/request">
-        <AnchorButton active={activeTab === 'need'} className="mb-2 mr-2">
-          ☀️ I need money
-        </AnchorButton>
-      </Link>
-
-      <Link passHref href="/volunteer">
-        <AnchorButton active={activeTab === 'volunteer'} className="mb-2 mr-2">
-          ⛑ Volunteer
-        </AnchorButton>
-      </Link>
-      {/* <AnchorButton
-        href="https://www.google.com/search?q=do+the+five"
-        className="mb-2"
-        target="_blank"
-      >
-        🤚 Do the Five
-      </AnchorButton> */}
+      <ButtonGroup>
+        <Link passHref href="/">
+          <SegmentedButton
+            active={activeTab === 'donate'}
+            className="transition ease-in-out duration-150 rounded-l-md"
+          >
+            🧡 Donate
+          </SegmentedButton>
+        </Link>
+        <Link passHref href="/volunteer">
+          <SegmentedButton
+            active={activeTab === 'volunteer'}
+            className="-ml-px transition ease-in-out duration-150 rounded-r-md"
+          >
+            ⛑ Volunteer
+          </SegmentedButton>
+        </Link>
+      </ButtonGroup>
     </ButtonRow>
+    <AnchorButton
+      className="text-lg mt-6 border"
+      href="https://twitter.com/HelpSForg"
+    >
+      @HelpSForg
+    </AnchorButton>
   </InfoHeader>
 )

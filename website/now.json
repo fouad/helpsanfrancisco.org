@@ -1,4 +1,5 @@
 {
+  "alias": ["helpsanfrancisco.now.sh", "helpsf.now.sh", "helpsanfrancisco.org"],
   "build": {
     "env": {
       "AIRTABLE_TOKEN": "@helpsf-airtable-token"

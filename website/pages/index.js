@@ -1,41 +1,50 @@
 import React, { useState } from 'react'
 import { getRecords } from '../utils/airtable'
 import { SearchTextInput } from '../components/form'
-import { CardList, Page, PageContent, CTAHeader } from '../components/layout'
+import {
+  CardList,
+  Page,
+  PageContent,
+  CTAHeader,
+  AnchorButton
+} from '../components/layout'
+import Link from 'next/link'
 
-const IndexPage = ({ helpOptions = defaultHelpOptions }) => {
+const IndexPage = ({ donateOptions = defaultDonateOptions }) => {
   const [state, setState] = useState({})
 
   return (
     <Page title="Help San Francisco · COVID-19">
-      <CTAHeader activeTab="have" />
+      <CTAHeader activeTab="donate" />
       <PageContent>
+        <Link href="/suggest" passHref>
+          <AnchorButton className="mb-4">
+            Suggest a business &rarr;
+          </AnchorButton>
+        </Link>
+
         <SearchTextInput
           value={state.filter || ''}
           onChange={e => setState({ ...state, filter: e.target.value })}
           placeholder="Search businesses"
         />
 
-        <CardList filter={state.filter} options={helpOptions} />
+        <CardList filter={state.filter} options={donateOptions} />
       </PageContent>
     </Page>
   )
 }
 
 export async function getStaticProps() {
-  let helpOptions = await getRecords({
+  let donateOptions = await getRecords({
     baseName: 'appP4wqAvfriNeXHW',
-    tableName: 'Help Options'
+    tableName: 'Donate Options'
   })
 
-  return {
-    props: {
-      helpOptions
-    }
-  }
+  return { props: { donateOptions } }
 }
 
-const defaultHelpOptions = [
+const defaultDonateOptions = [
   {
     name: 'Masks for Doctors',
     href: 'https://google.com',

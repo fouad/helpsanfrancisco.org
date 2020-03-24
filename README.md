@@ -4,9 +4,9 @@ As SARS-CoV-2 (also known as COVID-19) continues to affect daily life, many peop
 
 If it’s possible for you, please Stay Home. Let’s do whatever we can to help those who can’t. Here are some options:
 
-💰 [**I have money &rarr;**](https://helpsanfrancisco.org)
+💰 [**Donate &rarr;**](https://helpsanfrancisco.org)
 
-☀️ [**I need money &rarr;**](https://helpsanfrancisco.org/request)
+☀️ [**Need help? &rarr;**](https://helpsanfrancisco.org/suggest)
 
 ⛑ [**Volunteer &rarr;**](https://helpsanfrancisco.org/volunteer)
 

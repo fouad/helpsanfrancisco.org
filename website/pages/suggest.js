@@ -7,11 +7,11 @@ import {
 } from '../components/layout'
 
 const RequestPage = () => (
-  <Page title="Request Form · Help San Francisco">
-    <CTAHeader activeTab="need" />
+  <Page title="Suggest Form · Help San Francisco">
+    <CTAHeader />
     <PageContent className="block md:hidden text-center">
       <AnchorButton href="https://airtable.com/embed/shrPPQV2l3N7Vu6kQ?backgroundColor=orange">
-        Open the Request Form &rarr;
+        Open the Suggest Form &rarr;
       </AnchorButton>
     </PageContent>
     <iframe
