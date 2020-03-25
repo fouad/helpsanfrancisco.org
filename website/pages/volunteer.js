@@ -14,7 +14,7 @@ const VolunteerPage = ({ volunteerOptions = defaultVolunteerOptions }) => {
   const [state, setState] = useState({})
 
   return (
-    <Page title="Help San Francisco · COVID-19">
+    <Page title="Volunteer · Help San Francisco">
       <CTAHeader activeTab="volunteer" />
       <PageContent>
         <Link href="/suggest" passHref>

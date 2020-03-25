@@ -80,7 +80,7 @@ const IndexPage = ({ donateOptions = defaultDonateOptions }) => {
   }, [state.sortedByLocation])
 
   return (
-    <Page title="Help San Francisco · COVID-19">
+    <Page title="Help San Francisco 🧡">
       <CTAHeader activeTab="donate" />
       <PageContent>
         <Link href="/suggest" passHref>

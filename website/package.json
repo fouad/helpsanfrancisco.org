@@ -14,7 +14,8 @@
     "next": "latest",
     "node-fetch": "^2.6.0",
     "react": "16.10.1",
-    "react-dom": "16.10.1"
+    "react-dom": "16.10.1",
+    "react-ga": "^2.7.0"
   },
   "devDependencies": {
     "babel-plugin-emotion": "10.0.19",
