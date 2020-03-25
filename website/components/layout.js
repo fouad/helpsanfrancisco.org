@@ -125,8 +125,9 @@ export const Page = ({ url, title, ogImage, description, children }) => (
 export const CardList = ({ options, filter }) => {
   let filteredOptions = options.filter(
     o =>
-      !filter ||
-      new RegExp(filter, 'i').test([o.name, ...(o.tags || [])].join(''))
+      o.name &&
+      (!filter ||
+        new RegExp(filter, 'i').test([o.name, ...(o.tags || [])].join('')))
   )
 
   return (
@@ -140,7 +141,7 @@ export const CardList = ({ options, filter }) => {
           href={option.href}
           className="block no-underline focus:outline-none focus:shadow-outline rounded-md"
         >
-          <Card className="mt-4">
+          <Card className="relative mt-4">
             <h5 className="font-semibold">{option.name}</h5>
             {option.address && (
               <span className="text-gray-500 text-sm">{option.address}</span>
@@ -152,6 +153,16 @@ export const CardList = ({ options, filter }) => {
                 ))}
               </div>
             )}
+            <img
+              className={`absolute ${
+                /gofundme/.test(option.href) ? 'h-4' : 'h-7'
+              } mb-4 mr-4 right-0	bottom-0`}
+              src={
+                /gofundme/.test(option.href)
+                  ? '/static/images/gofundme.png'
+                  : '/static/images/website.svg'
+              }
+            />
           </Card>
         </a>
       ))}

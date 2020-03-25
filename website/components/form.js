@@ -61,10 +61,10 @@ export const SearchTextInput = ({
     {onSortByLocation && (
       <button
         onClick={onSortByLocation}
-        className={`flex outline-none focus:shadow-outline bg-white hover:bg-gray-100 font-semibold py-1 px-2 border border-gray-400 border-l-0 rounded-r-md shadow-sm focus:shadow-outline text-sm ${
+        className={`flex outline-none focus:shadow-outline bg-white hover:bg-gray-100 font-semibold py-1 px-2 border border-l-0 rounded-r-md shadow-sm focus:shadow-outline text-sm ${
           confirmedLocationPermission ? 'text-blue-500' : 'text-gray-600'
         }`}
-        style={{ outline: 'none' }}
+        style={{ outline: 'none', borderColor: '#d2d6dc' }}
       >
         <svg
           x="0px"
