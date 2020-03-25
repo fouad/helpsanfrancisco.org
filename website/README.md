@@ -2,12 +2,16 @@
 
 ## Usage
 
-Install it and run:
+Install and run with NPM:
 
 ```bash
 npm install
 npm run dev
-# or
+```
+
+Or with Yarn:
+
+```bash
 yarn
 yarn dev
 ```
