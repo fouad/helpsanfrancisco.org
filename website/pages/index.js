@@ -74,6 +74,9 @@ const IndexPage = ({ donateOptions = defaultDonateOptions }) => {
           window.alert(
             'This feature requires browser geolocation, learn more at https://support.google.com/chrome/answer/142065?hl=en'
           )
+        },
+        {
+          enableHighAccuracy: true
         }
       )
     }
