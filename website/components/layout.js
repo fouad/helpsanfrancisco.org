@@ -72,6 +72,7 @@ const Tag = styled.span`
       case 'Retail':
         return tw`bg-teal-100 text-teal-700`
       case 'Government':
+      case 'Service':
         return tw`bg-purple-100 text-purple-700`
       case 'Non-profit':
         return tw`bg-green-100 text-green-700`
