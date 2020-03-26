@@ -124,7 +124,7 @@ export async function getStaticProps() {
     tableName: 'Donate Options'
   })
 
-  return { props: { donateOptions } }
+  return { revalidate: 1, props: { donateOptions } }
 }
 
 const defaultDonateOptions = [

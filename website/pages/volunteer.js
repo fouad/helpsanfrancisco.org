@@ -41,7 +41,7 @@ export async function getStaticProps() {
     tableName: 'Volunteer Options'
   })
 
-  return { props: { volunteerOptions } }
+  return { revalidate: 1, props: { volunteerOptions } }
 }
 
 const defaultVolunteerOptions = [
