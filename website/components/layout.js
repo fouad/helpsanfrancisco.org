@@ -54,7 +54,7 @@ const InfoHeader = styled.div`
 `
 
 const InfoTitle = styled.h2`
-  ${tw`mx-auto px-8 max-w-2xl text-2xl-lg text-xl font-normal`}
+  ${tw`mx-auto px-10 max-w-2xl text-2xl-lg text-xl font-normal`}
 `
 
 const ButtonRow = styled.div`
