@@ -18,11 +18,22 @@ export const ButtonGroup = styled.span`
 `
 
 export const AnchorButton = styled.a`
-  ${tw`inline-block rounded-full text-sm font-medium leading-none py-2 px-3 bg-blue-100 text-blue-700 border shadow-sm`}
+  ${tw`inline-block rounded-full text-sm font-medium leading-none py-2 px-3 border shadow-sm`}
     :focus {
     ${tw`shadow-outline outline-none`}
   }
-  :hover {
+  ${props => {
+      switch (props.color) {
+        case undefined:
+        case 'blue':
+          return tw`bg-blue-100 text-blue-700`
+        case 'gray':
+          return tw`bg-gray-100 text-gray-700`
+        default:
+          return ''
+      }
+    }}
+    :hover {
     ${tw`bg-blue-200`}
   }
   :active {
@@ -55,6 +66,10 @@ const InfoHeader = styled.div`
 
 const InfoTitle = styled.h2`
   ${tw`mx-auto px-10 max-w-2xl text-2xl-lg text-xl font-normal`}
+`
+
+const InfoSmall = styled.span`
+  ${tw`pr-4 text-sm font-normal`}
 `
 
 const ButtonRow = styled.div`
@@ -141,6 +156,7 @@ export const CardList = ({ options, filter }) => {
           key={cardKey}
           href={option.href}
           className="block no-underline focus:outline-none focus:shadow-outline rounded-md"
+          target="_blank"
         >
           <Card className="relative mt-4">
             <h5 className="font-semibold">{option.name}</h5>
@@ -213,19 +229,30 @@ export const CTAHeader = ({ activeTab = 'need' }) => (
     </ButtonRow>
     <ButtonRow>
       <AnchorButton
+        target="_blank"
         className="text-lg mt-6 border mr-3"
         href="https://twitter.com/HelpSForg"
       >
         @HelpSForg
       </AnchorButton>
       <AnchorButton
+        target="_blank"
         className="text-lg mt-6 border"
         href={`https://twitter.com/intent/tweet?url=https://helpsanfrancisco.org&text=${encodeURIComponent(
-          'Help San Francisco businesses and people by making a donation or volunteering at'
+          'Help San Francisco businesses and workers by making a donation or volunteering at'
         )}`}
       >
         Tweet this page
       </AnchorButton>
     </ButtonRow>
+    <InfoSmall>Looking for gift cards?</InfoSmall>
+    <AnchorButton
+      color="gray"
+      target="_blank"
+      className="text-lg mt-6 border mr-3"
+      href="https://saveourfaves.org/?ref=helpsf"
+    >
+      Save our Faves
+    </AnchorButton>
   </InfoHeader>
 )
