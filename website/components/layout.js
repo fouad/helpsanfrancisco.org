@@ -5,12 +5,16 @@ import Link from 'next/link'
 import Head from 'next/head'
 
 export const SegmentedButton = styled.a`
-  ${tw`relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700`}
+  ${tw`relative inline-block items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700`}
     :focus {
     ${tw`shadow-outline outline-none`}
   }
 
   ${props => (props.active ? tw`bg-gray-200` : tw`hover:bg-gray-100`)}
+`
+
+export const SegmentedButtonIcon = styled.span`
+  ${tw`block text-center w-full mb-1`}
 `
 
 export const ButtonGroup = styled.span`
@@ -171,14 +175,8 @@ export const CardList = ({ options, filter }) => {
               </div>
             )}
             <img
-              className={`absolute ${
-                /gofundme/.test(option.href) ? 'h-4' : 'h-7'
-              } mb-4 mr-4 right-0	bottom-0`}
-              src={
-                /gofundme/.test(option.href)
-                  ? '/static/images/gofundme.png'
-                  : '/static/images/website.svg'
-              }
+              className={`absolute h-7 mb-4 mr-4 right-0	bottom-0`}
+              src={getLogo(option.href)}
             />
           </Card>
         </a>
@@ -187,7 +185,23 @@ export const CardList = ({ options, filter }) => {
   )
 }
 
-export const CTAHeader = ({ activeTab = 'need' }) => (
+function getLogo(href) {
+  if (/gofundme/.test(href)) {
+    return '/static/images/gofundme.png'
+  } else if (/doordash/.test(href)) {
+    return '/static/images/doordash.png'
+  } else if (/ubereats/.test(href)) {
+    return '/static/images/uber.png'
+  } else if (/caviar/.test(href)) {
+    return '/static/images/caviar.png'
+  } else if (/instagram/.test(href)) {
+    return '/static/images/instagram.png'
+  } else {
+    return '/static/images/website.svg'
+  }
+}
+
+export const CTAHeader = ({ activeTab = '' }) => (
   <InfoHeader>
     <Link passHref href="/">
       <a className="no-underline">
@@ -203,7 +217,7 @@ export const CTAHeader = ({ activeTab = 'need' }) => (
       many people are in financial distress.
     </InfoTitle>
     <InfoTitle className="my-8">
-      If it&rsquo;s possible for you, please <strong>Stay Home</strong>.
+      mv .. If it&rsquo;s possible for you, please <strong>Stay Home</strong>.
       Let&rsquo;s do whatever we can to help those who can&rsquo;t. Here are
       some options:
     </InfoTitle>
@@ -214,7 +228,15 @@ export const CTAHeader = ({ activeTab = 'need' }) => (
             active={activeTab === 'donate'}
             className="transition ease-in-out duration-150 rounded-l-md"
           >
-            🧡 Donate
+            <SegmentedButtonIcon>🧡</SegmentedButtonIcon> Donate
+          </SegmentedButton>
+        </Link>
+        <Link passHref href="/still-open">
+          <SegmentedButton
+            active={activeTab === 'stillOpen'}
+            className="transition ease-in-out duration-150 -ml-px"
+          >
+            <SegmentedButtonIcon>👋</SegmentedButtonIcon> Still Open
           </SegmentedButton>
         </Link>
         <Link passHref href="/volunteer">
@@ -222,7 +244,7 @@ export const CTAHeader = ({ activeTab = 'need' }) => (
             active={activeTab === 'volunteer'}
             className="-ml-px transition ease-in-out duration-150 rounded-r-md"
           >
-            ⛑ Volunteer
+            <SegmentedButtonIcon>⛑</SegmentedButtonIcon> Volunteer
           </SegmentedButton>
         </Link>
       </ButtonGroup>
