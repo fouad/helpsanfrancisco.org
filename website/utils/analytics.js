@@ -8,7 +8,5 @@ export const pageview = () => {
 }
 
 export const outbound = url => {
-  ReactGA.outboundLink({ label: url }, () => {
-    document.location = url
-  })
+  ReactGA.outboundLink({ label: url }, () => {})
 }
