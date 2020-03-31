@@ -10,17 +10,17 @@ import {
 } from '../components/layout'
 import Link from 'next/link'
 
-const IndexPage = ({ donateOptions = defaultDonateOptions }) => {
+const StillOpenPage = ({ stillOpenOptions = defaultStillOpenOptions }) => {
   const [state, setState] = useState({
     confirmedLocationPermission: false,
     sortedByLocation: false,
-    donateOptions
+    stillOpenOptions
   })
 
   const onSortByLocation = useCallback(() => {
     if (state.sortedByLocation) {
       setState({
-        donateOptions,
+        stillOpenOptions,
         sortedByLocation: false,
         confirmedLocationPermission: false
       })
@@ -33,7 +33,7 @@ const IndexPage = ({ donateOptions = defaultDonateOptions }) => {
       navigator.geolocation.getCurrentPosition(
         position => {
           setState(state => {
-            const donateOptions = state.donateOptions
+            const stillOpenOptions = state.stillOpenOptions
               .map(value => {
                 let coords = value.location || {}
                 let distance = getDistance(
@@ -59,7 +59,7 @@ const IndexPage = ({ donateOptions = defaultDonateOptions }) => {
 
             return {
               ...state,
-              donateOptions,
+              stillOpenOptions,
               sortedByLocation: true,
               requestingLocation: false,
               confirmedLocationPermission: true
@@ -83,7 +83,7 @@ const IndexPage = ({ donateOptions = defaultDonateOptions }) => {
   }, [state.sortedByLocation])
 
   return (
-    <Page title="Help San Francisco 🧡">
+    <Page title="Still Open · Help San Francisco 🧡">
       <CTAHeader activeTab="still-open" />
       <PageContent>
         <Link href="/suggest" passHref>
@@ -101,7 +101,7 @@ const IndexPage = ({ donateOptions = defaultDonateOptions }) => {
           placeholder="Search businesses"
         />
 
-        <CardList filter={state.filter} options={state.donateOptions} />
+        <CardList filter={state.filter} options={state.stillOpenOptions} />
       </PageContent>
     </Page>
   )
@@ -119,15 +119,15 @@ function getDistance(lat1, lon1, lat2, lon2) {
 }
 
 export async function getStaticProps() {
-  let donateOptions = await getRecords({
+  let stillOpenOptions = await getRecords({
     baseName: 'appP4wqAvfriNeXHW',
     tableName: 'Still Open Options'
   })
 
-  return { revalidate: 1, props: { donateOptions } }
+  return { revalidate: 1, props: { stillOpenOptions } }
 }
 
-const defaultDonateOptions = [
+const defaultStillOpenOptions = [
   {
     name: 'Masks for Doctors',
     href: 'https://google.com',
@@ -135,4 +135,4 @@ const defaultDonateOptions = [
   }
 ]
 
-export default IndexPage
+export default StillOpenPage
