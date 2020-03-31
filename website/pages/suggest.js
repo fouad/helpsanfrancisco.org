@@ -17,11 +17,11 @@ const RequestPage = () => (
     <iframe
       width="100%"
       height="1850"
-      frameborder="0"
+      frameBorder="0"
       onmousewheel=""
       className="airtable-embed hidden md:block"
       src="https://airtable.com/embed/shrPPQV2l3N7Vu6kQ?backgroundColor=orange"
-      style={{ background: 'transparent', border: '1px solid #ccc;' }}
+      style={{ background: 'transparent', border: '1px solid #ccc' }}
     />
   </Page>
 )
