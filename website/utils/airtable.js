@@ -2,6 +2,14 @@ import fetch from 'node-fetch'
 
 const AIRTABLE_TOKEN = process.env.AIRTABLE_TOKEN || ''
 
+const FAKE_AIRTABLE_DATA = [
+  {
+    name: 'Masks for Doctors',
+    href: 'https://google.com',
+    tags: ['Healthcare', 'Restaurant', 'Donation']
+  }
+]
+
 export async function getRecords({
   baseName = '',
   tableName = '',
@@ -10,7 +18,11 @@ export async function getRecords({
   view = 'Grid%20view'
 }) {
   if (!AIRTABLE_TOKEN) {
-    throw new Error('missing: process.env.AIRTABLE_TOKEN')
+    console.warn(
+      'missing: process.env.AIRTABLE_TOKEN, using FAKE_AIRTABLE_DATA'
+    )
+
+    return FAKE_AIRTABLE_DATA
   }
 
   try {

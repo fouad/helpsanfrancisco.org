@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import tw from 'tailwind.macro'
 import Link from 'next/link'
 import Head from 'next/head'
+import { outbound } from '../utils/analytics'
 
 export const SegmentedButton = styled.a`
   ${tw`relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700`}
@@ -155,6 +156,7 @@ export const CardList = ({ options, filter }) => {
         <a
           key={cardKey}
           href={option.href}
+          onClick={() => outbound(option.href)}
           className="block no-underline focus:outline-none focus:shadow-outline rounded-md"
           target="_blank"
         >
