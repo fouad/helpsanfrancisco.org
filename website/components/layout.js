@@ -217,7 +217,7 @@ export const CTAHeader = ({ activeTab = '' }) => (
       many people are in financial distress.
     </InfoTitle>
     <InfoTitle className="my-8">
-      mv .. If it&rsquo;s possible for you, please <strong>Stay Home</strong>.
+      If it&rsquo;s possible for you, please <strong>Stay Home</strong>.
       Let&rsquo;s do whatever we can to help those who can&rsquo;t. Here are
       some options:
     </InfoTitle>
