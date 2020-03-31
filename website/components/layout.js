@@ -63,7 +63,7 @@ export const Logo = styled.h1`
 `
 
 const InfoHeader = styled.div`
-  ${tw`bg-gray-100 pt-10 pb-16 text-center`}
+  ${tw`bg-gray-100 pt-10 pb-16 text-center mb-4`}
 
   border-bottom: 2px solid #cbd5e0;
 `
@@ -85,6 +85,7 @@ const Tag = styled.span`
   ${props => {
     switch (props.children) {
       case 'Restaurant':
+      case 'Bar':
         return tw`bg-indigo-100 text-indigo-700`
       case 'Venue':
         return tw`bg-orange-100 text-orange-700`
@@ -98,9 +99,12 @@ const Tag = styled.span`
       case 'Tech Workers':
         return tw`bg-yellow-100 text-yellow-700`
       case 'Healthcare':
+      case 'Converted to Store':
         return tw`bg-blue-100 text-blue-700`
       case 'Subscription':
+      case 'To Go':
         return tw`bg-green-100 text-green-700`
+      case 'Delivery':
       case 'Donation':
         return tw`bg-red-100 text-red-700`
     }
@@ -212,54 +216,25 @@ export const CTAHeader = ({ activeTab = '' }) => (
         </Logo>
       </a>
     </Link>
-    <InfoTitle className="my-8">
+    <InfoTitle className="mt-8 mb-4">
       As SARS-CoV-2 (also known as COVID-19) continues to affect daily life,
       many people are in financial distress.
     </InfoTitle>
-    <InfoTitle className="my-8">
+    <InfoTitle className="my-4">
       If it&rsquo;s possible for you, please <strong>Stay Home</strong>.
-      Let&rsquo;s do whatever we can to help those who can&rsquo;t. Here are
-      some options:
+      Let&rsquo;s do whatever we can to help those who aren&rsquo;t able to.
     </InfoTitle>
-    <ButtonRow>
-      <ButtonGroup>
-        <Link passHref href="/">
-          <SegmentedButton
-            active={activeTab === 'donate'}
-            className="transition ease-in-out duration-150 rounded-l-md"
-          >
-            <SegmentedButtonIcon>🧡</SegmentedButtonIcon> Donate
-          </SegmentedButton>
-        </Link>
-        <Link passHref href="/still-open">
-          <SegmentedButton
-            active={activeTab === 'still-open'}
-            className="transition ease-in-out duration-150 -ml-px"
-          >
-            <SegmentedButtonIcon>👋</SegmentedButtonIcon> Still Open
-          </SegmentedButton>
-        </Link>
-        <Link passHref href="/volunteer">
-          <SegmentedButton
-            active={activeTab === 'volunteer'}
-            className="-ml-px transition ease-in-out duration-150 rounded-r-md"
-          >
-            <SegmentedButtonIcon>⛑</SegmentedButtonIcon> Volunteer
-          </SegmentedButton>
-        </Link>
-      </ButtonGroup>
-    </ButtonRow>
     <ButtonRow>
       <AnchorButton
         target="_blank"
-        className="text-lg mt-6 border mr-3"
+        className="text-lg mt-4 border mr-3"
         href="https://twitter.com/HelpSForg"
       >
         @HelpSForg
       </AnchorButton>
       <AnchorButton
         target="_blank"
-        className="text-lg mt-6 border"
+        className="text-lg mt-4 border"
         href={`https://twitter.com/intent/tweet?url=https://helpsanfrancisco.org&text=${encodeURIComponent(
           'Help San Francisco businesses and workers by making a donation or volunteering at'
         )}`}
@@ -271,10 +246,50 @@ export const CTAHeader = ({ activeTab = '' }) => (
     <AnchorButton
       color="gray"
       target="_blank"
-      className="text-lg mt-6 border mr-3"
+      className="text-lg mt-4 border mr-3"
       href="https://saveourfaves.org/?ref=helpsf"
     >
       Save our Faves
     </AnchorButton>
+
+    <NavBarContainer>
+      <NavBar activeTab={activeTab} />
+    </NavBarContainer>
   </InfoHeader>
+)
+
+const NavBarContainer = styled.div`
+  margin-top: 1.5rem;
+  margin-bottom: -6rem;
+`
+
+const NavBar = ({ activeTab }) => (
+  <ButtonRow>
+    <ButtonGroup>
+      <Link passHref href="/">
+        <SegmentedButton
+          active={activeTab === 'donate'}
+          className="transition ease-in-out duration-150 rounded-l-md"
+        >
+          <SegmentedButtonIcon>🧡</SegmentedButtonIcon> Donate
+          </SegmentedButton>
+      </Link>
+      <Link passHref href="/still-open">
+        <SegmentedButton
+          active={activeTab === 'still-open'}
+          className="transition ease-in-out duration-150 -ml-px"
+        >
+          <SegmentedButtonIcon>👋</SegmentedButtonIcon> Still Open
+          </SegmentedButton>
+      </Link>
+      <Link passHref href="/volunteer">
+        <SegmentedButton
+          active={activeTab === 'volunteer'}
+          className="-ml-px transition ease-in-out duration-150 rounded-r-md"
+        >
+          <SegmentedButtonIcon>⛑</SegmentedButtonIcon> Volunteer
+          </SegmentedButton>
+      </Link>
+    </ButtonGroup>
+  </ButtonRow>
 )
