@@ -84,7 +84,7 @@ const IndexPage = ({ donateOptions = defaultDonateOptions }) => {
 
   return (
     <Page title="Help San Francisco 🧡">
-      <CTAHeader activeTab="donate" />
+      <CTAHeader activeTab="still-open" />
       <PageContent>
         <Link href="/suggest" passHref>
           <AnchorButton className="mb-4">
