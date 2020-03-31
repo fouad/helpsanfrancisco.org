@@ -233,7 +233,7 @@ export const CTAHeader = ({ activeTab = '' }) => (
         </Link>
         <Link passHref href="/still-open">
           <SegmentedButton
-            active={activeTab === 'stillOpen'}
+            active={activeTab === 'still-open'}
             className="transition ease-in-out duration-150 -ml-px"
           >
             <SegmentedButtonIcon>👋</SegmentedButtonIcon> Still Open
