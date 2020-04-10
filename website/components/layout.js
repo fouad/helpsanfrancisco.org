@@ -238,7 +238,7 @@ export const CTAHeader = ({ activeTab = '' }) => (
         target="_blank"
         className="text-lg mt-4 border"
         href={`https://twitter.com/intent/tweet?url=https://helpsanfrancisco.org&text=${encodeURIComponent(
-          'Help San Francisco businesses and workers by making a donation or volunteering at'
+          'You can find SF restaurants and businesses to support through donations to their workers or ordering takeout using'
         )}`}
       >
         Tweet this page
